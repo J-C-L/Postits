@@ -6,34 +6,41 @@
   <link rel="stylesheet" type="text/css" href="styles/style.css">
   <link rel="stylesheet" type="text/css" href="styles/colpick.css">
 </head>
+
 <body>
   <header class="row">
     <h1>Notes!</h1>
   </header>
+
   <main class="row">
     <aside class="columns medium-4">
+
       <label for="text">Text: </label>
       <textarea id="text" name="text" id="text"></textarea>
+
       <label for="color">Color</label>
       <input type="color" id="color" value="#ffff88" size=8>        <br/>
+
       <button class="button success">Create</button>
     </aside>
+
     <section class="columns medium-8" >
       <section class="row" id="postits">
 
       </section>
-
     </section>
 
   </main>
+
   <footer>
   </footer>
+
   <script src="/app.bundle.js" charset="utf-8"></script>
 </body>
 <script id="postit-template" type="text/template">
   <div class="columns medium-4">
 
-  <section class="location postit" style="background: -webkit-linear-gradient(-45deg, <%- color %> 81%,<%- color %> 82%,<%- color %> 82%,#<%- (parseInt(color.substring(1), 16) + 64).toString(16) %> 100%); border-top:10px solid #<%- (parseInt(color.substring(1), 16) + 32).toString(16)%>;">
+<section class="location postit" style="background: -webkit-linear-gradient(-45deg, <%- color %> 81%,<%- color %> 82%,<%- color %> 82%,#<%- (parseInt(color.substring(1), 16) + 64).toString(16) %> 100%); border-top:10px solid #<%- (parseInt(color.substring(1), 16) + 32).toString(16)%>;">
     <p>
       <%- text %>
     </p>
@@ -42,4 +49,3 @@
 
 </script>
 </html>
-
