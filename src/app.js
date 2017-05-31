@@ -4,6 +4,7 @@ import 'jquery-colpick';
 
 import Postit from 'models/postit';
 import PostitNotes from './collections/postit_notes.js';
+import PostItView from './views/postit_view.js';
 
 
 // don't use until $(docuent).ready
@@ -26,16 +27,15 @@ var myPostit = new Postit({
 });
 
 
-var render =  function(postit){
-  var jsonPostit = postit.toJSON();
-  // invoke the compiled template to generate HTML using the data from a specific task
-  var generatedHTML = postitTemplate(jsonPostit);
-  $('#postits').append(generatedHTML);
-};
+// var render =  function(postit){
+//   var jsonPostit = postit.toJSON();
+//   // invoke the compiled template to generate HTML using the data from a specific task
+//   var generatedHTML = postitTemplate(jsonPostit);
+//   $('#postits').append(generatedHTML);
+// };
 
 
 var newPostItForm = function() {
-
   // Get the values from the fields
   var textData = $('#text').val();
   $('#text').val('');
@@ -64,10 +64,18 @@ var renderNotes = function(postit_notes) {
 
 $(document).ready(function() {
 
-  // compiling the template
-  postitTemplate = _.template($('#postit-template').html());
 
-  // render(myPostit);
+
+  var postItView = new PostItView({
+          model: myPostit,
+          template: _.template($('#postit-template').html())
+        });
+
+  $('#postits').append(postItView.render().$el);
+
+
+
+
 
   // postitData.forEach(function(rawPostit){
   //   var myPostit = new Postit(rawPostit);
@@ -77,7 +85,7 @@ $(document).ready(function() {
 
   postitNotes = new PostitNotes(postitData);
 
-  renderNotes(postitNotes);
+  // renderNotes(postitNotes);
 
   postitNotes.on("update", function() {
     renderNotes(postitNotes);
