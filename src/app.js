@@ -36,19 +36,19 @@ var myPostit = new Postit({
 // };
 
 
-var newPostItForm = function() {
-  // Get the values from the fields
-  var textData = $('#text').val();
-  $('#text').val('');
-
-  var colorData = $('#color').val();
-  $('#color').val('');
-
-  return {
-    text: textData,
-    color: colorData,
-  };
-};
+// var newPostItForm = function() {
+//   // Get the values from the fields
+//   var textData = $('#text').val();
+//   $('#text').val('');
+//
+//   var colorData = $('#color').val();
+//   $('#color').val('');
+//
+//   return {
+//     text: textData,
+//     color: colorData,
+//   };
+// };
 
 
 // var renderNotes = function(postit_notes) {
@@ -100,13 +100,13 @@ postitListView.render();
 
 
 
-
-  $('.success').click(function(event){
-  var formData = newPostItForm();
-  var postit = new Postit(formData);
-
-  postitNotes.add(postit);
-  });
+  //
+  // $('.success').click(function(event){
+  // var formData = newPostItForm();
+  // var postit = new Postit(formData);
+  //
+  // postitNotes.add(postit);
+  // });
 
 
 

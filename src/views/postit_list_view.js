@@ -7,7 +7,7 @@ var PostItListView = Backbone.View.extend({
   initialize: function(params) {
     this.template = params.mytemplate;
 
-    // this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model, "update", this.render);
   },
   render: function(){
     var self = this;
@@ -22,29 +22,28 @@ var PostItListView = Backbone.View.extend({
       self.$('#postits').append(postItView.render().$el);
     });
     return this;
+  },
+  events: {
+    'click button.success': "addPostit",
+  },
+  getFormFields: function(){
+    var textData = this.$('#text').val();
+    this.$('#text').val('');
+
+    var colorData = this.$('#color').val();
+    this.$('#color').val('');
+
+    return {
+      text: textData,
+      color: colorData,
+    };
+  },
+  addPostit: function() {
+    var formValues = this.getFormFields();
+    this.model.add(formValues);
   }
-  // events: {
-  //   'click button.success': "addPostit",
-  // }
-  // addPostit: function(e) {
-  //
-  //   var textData = self.$('#text').val();
-  //   self.$('#text').val('');
-  //
-  //   var colorData = self.$('#color').val();
-  //   self.$('#color').val('');
-  //
-  //   var postitData = {
-  //     text: textData,
-  //     color: colorData,
-  //   };
-  //     console.log(postitData);
-    // var postit = new Postit(postitData);
-    //   self.model.add(postit);
-  // }
+
 });
-
-
 
 
 export default PostItListView;
