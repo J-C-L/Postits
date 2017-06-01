@@ -5,6 +5,7 @@ import 'jquery-colpick';
 import Postit from 'models/postit';
 import PostitNotes from './collections/postit_notes.js';
 import PostItView from './views/postit_view.js';
+import PostItListView from './views/postit_list_view.js';
 
 
 // don't use until $(docuent).ready
@@ -50,31 +51,28 @@ var newPostItForm = function() {
 };
 
 
-var renderNotes = function(postit_notes) {
-  // Clear the unordered list
-  $('#postits').empty();
-
-  // Iterate through the list rendering each Task
-  postitNotes.each(function(note) {
-    render(note);
-  });
-};
+// var renderNotes = function(postit_notes) {
+//   // Clear the unordered list
+//   $('#postits').empty();
+//
+//   // Iterate through the list rendering each Task
+//   postitNotes.each(function(note) {
+//     render(note);
+//   });
+// };
 
 
 
 $(document).ready(function() {
 
+postitTemplate=
+ _.template($('#postit-template').html());
 
-
-  var postItView = new PostItView({
-          model: myPostit,
-          template: _.template($('#postit-template').html())
-        });
-
-  $('#postits').append(postItView.render().$el);
-
-
-
+  // var postItView = new PostItView({
+  //         model: myPostit,
+  //         template: _.template($('#postit-template').html()),
+  //       });
+  //  $('#postits').append(postItView.render().$el);
 
 
   // postitData.forEach(function(rawPostit){
@@ -85,11 +83,20 @@ $(document).ready(function() {
 
   postitNotes = new PostitNotes(postitData);
 
-  // renderNotes(postitNotes);
+  var postitListView = new PostItListView({
+  mytemplate: postitTemplate,
+  model: postitNotes,
+  el: $('main')
+});
 
-  postitNotes.on("update", function() {
-    renderNotes(postitNotes);
-  });
+postitListView.render();
+
+
+
+
+  // postitNotes.on("update", function() {
+  //   renderNotes(postitNotes);
+  // });
 
 
 
